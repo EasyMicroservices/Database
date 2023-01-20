@@ -14,7 +14,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
     /// 
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class EntityframeworkCoreQueryableProvider<TEntity> : IEasyQueryableAsync<TEntity>
+    public class EntityframeworkCoreReadableQueryableProvider<TEntity> : IEasyReadableQueryableAsync<TEntity>
         where TEntity : class
     {
         private readonly IQueryable<TEntity> _queryable;
@@ -22,7 +22,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// 
         /// </summary>
         /// <param name="queryable"></param>
-        public EntityframeworkCoreQueryableProvider(IQueryable<TEntity> queryable)
+        public EntityframeworkCoreReadableQueryableProvider(IQueryable<TEntity> queryable)
         {
             _queryable = queryable;
         }
@@ -48,7 +48,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <returns></returns>
         public Task<bool> AllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            return _queryable.AnyAsync(predicate, cancellationToken);
+            return _queryable.AllAsync(predicate, cancellationToken);
         }
         /// <summary>
         /// 
