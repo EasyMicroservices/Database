@@ -9,14 +9,14 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
     /// <summary>
     /// 
     /// </summary>
-    public class EntityframeworkCoreDatabaseProvider : IDatabase, IAsyncDisposable
+    public class EntityFrameworkCoreDatabaseProvider : IDatabase, IAsyncDisposable
     {
         private readonly DbContext _dbContext;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="dbContext"></param>
-        public EntityframeworkCoreDatabaseProvider(DbContext dbContext)
+        public EntityFrameworkCoreDatabaseProvider(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -38,7 +38,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <exception cref="NotImplementedException"></exception>
         public IEasyReadableQueryableAsync<TEntity> GetReadableOf<TEntity>() where TEntity : class
         {
-            return new EntityframeworkCoreReadableQueryableProvider<TEntity>(_dbContext.Set<TEntity>());
+            return new EntityFrameworkCoreReadableQueryableProvider<TEntity>(_dbContext.Set<TEntity>());
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <exception cref="NotImplementedException"></exception>
         public IEasyWritableQueryableAsync<TEntity> GetWritableOf<TEntity>() where TEntity : class
         {
-            return new EntityframeworkCoreWritableQueryableProvider<TEntity>(_dbContext, _dbContext.Set<TEntity>());
+            return new EntityFrameworkCoreWritableQueryableProvider<TEntity>(_dbContext);
         }
 
         /// <summary>

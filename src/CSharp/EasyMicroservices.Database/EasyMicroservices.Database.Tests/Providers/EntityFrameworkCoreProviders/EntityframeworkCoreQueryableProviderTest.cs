@@ -4,9 +4,9 @@ using EasyMicroservices.Database.Tests.Database.Entities;
 
 namespace EasyMicroservices.Database.Tests.Providers.EntityFrameworkCoreProviders
 {
-    public class EntityframeworkCoreQueryableProviderTest : BaseQueryableProviderTest
+    public class EntityframeworkCoreQueryableProviderTest : BaseQueryableProviderTest<UserEntity>
     {
-        public EntityframeworkCoreQueryableProviderTest() : base(new EntityframeworkCoreDatabaseProvider(new TestDbContext()).GetQueryOf<UserEntity>())
+        public EntityframeworkCoreQueryableProviderTest() : base(new EntityFrameworkCoreDatabaseProvider(new TestDbContext()).GetQueryOf<UserEntity>())
         {
 
         }

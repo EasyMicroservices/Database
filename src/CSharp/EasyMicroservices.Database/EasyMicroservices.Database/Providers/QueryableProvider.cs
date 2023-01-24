@@ -52,6 +52,29 @@ namespace EasyMicroservices.Database.Providers
         {
             return _writable.AddAsync(entity, cancellationToken);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEntityEntry<TEntity>> RemoveAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            return _writable.RemoveAsync(predicate, cancellationToken);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEntityEntry<TEntity>> RemoveAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            return _writable.RemoveAllAsync(predicate, cancellationToken);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -559,6 +582,7 @@ namespace EasyMicroservices.Database.Providers
         {
             return _readable.GetEnumerator();
         }
+
         #endregion
     }
 }

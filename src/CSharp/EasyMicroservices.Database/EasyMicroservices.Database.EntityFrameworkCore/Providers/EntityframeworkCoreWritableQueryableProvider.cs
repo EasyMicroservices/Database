@@ -1,26 +1,26 @@
 ﻿using EasyMicroservices.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
 {
     /// <summary>
     /// 
     /// </summary>
-    public class EntityframeworkCoreWritableQueryableProvider<TEntity> : IEasyWritableQueryableAsync<TEntity>
+    public class EntityFrameworkCoreWritableQueryableProvider<TEntity> : IEasyWritableQueryableAsync<TEntity>
         where TEntity : class
     {
-        private readonly DbSet<TEntity> _dbSet;
         private readonly DbContext _context;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="dbSet"></param>
-        public EntityframeworkCoreWritableQueryableProvider(DbContext context, DbSet<TEntity> dbSet)
+        public EntityFrameworkCoreWritableQueryableProvider(DbContext context)
         {
-            _dbSet = dbSet;
             _context = context;
         }
         /// <summary>
@@ -31,7 +31,33 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <returns></returns>
         public async Task<IEntityEntry<TEntity>> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            var result = await _dbSet.AddAsync(entity, cancellationToken);
+            var result = await _context.Set<TEntity>().AddAsync(entity, cancellationToken);
+            return new EntityEntryProvider<TEntity>(result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IEntityEntry<TEntity>> RemoveAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            var removeItems = await _context.Set<TEntity>().Where(predicate).ToListAsync(cancellationToken);
+             _context.Set<TEntity>().RemoveRange(removeItems);
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IEntityEntry<TEntity>> RemoveAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            var removeItem = await _context.Set<TEntity>().Where(predicate).FirstOrDefaultAsync(cancellationToken);
+            var result = _context.Set<TEntity>().Remove(removeItem);
             return new EntityEntryProvider<TEntity>(result);
         }
 
