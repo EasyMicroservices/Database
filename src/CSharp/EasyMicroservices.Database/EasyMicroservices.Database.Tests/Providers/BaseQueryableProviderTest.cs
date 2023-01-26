@@ -1,15 +1,15 @@
 ﻿using EasyMicroservices.Database.Interfaces;
-using EasyMicroservices.Database.Tests.Database.Entities;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using EasyMicroservices.Database.Tests.Database.Interfaces;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace EasyMicroservices.Database.Tests.Providers
 {
-    public abstract class BaseQueryableProviderTest
+    public abstract class BaseQueryableProviderTest<TUser>
+        where TUser : class, IUser, new()
     {
-        IEasyQueryableAsync<UserEntity> _queryable;
-        public BaseQueryableProviderTest(IEasyQueryableAsync<UserEntity> queryable)
+        IEasyQueryableAsync<TUser> _queryable;
+        public BaseQueryableProviderTest(IEasyQueryableAsync<TUser> queryable)
         {
             _queryable = queryable;
         }
@@ -24,11 +24,13 @@ namespace EasyMicroservices.Database.Tests.Providers
         [InlineData("Ali")]
         public virtual async Task AddAsync(string name)
         {
-            var result = await _queryable.AddAsync(new UserEntity()
+            if (await _queryable.AnyAsync(x => x.Name == name))
+                await _queryable.RemoveAllAsync(x => x.Name == name);
+            Assert.False(await _queryable.AnyAsync(x => x.Name == name));
+            var result = await _queryable.AddAsync(new TUser()
             {
                 Name = name
             });
-            Assert.False(await _queryable.AnyAsync(x => x.Name == name));
             await _queryable.SaveChangesAsync();
             Assert.True(await _queryable.AnyAsync(x => x.Name == name));
         }
