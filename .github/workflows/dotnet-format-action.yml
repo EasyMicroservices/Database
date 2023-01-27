@@ -6,7 +6,9 @@ on:
 jobs:
   format:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./src/CSharp/EasyMicroservices.Database
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET
@@ -23,11 +25,10 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           action: "fix"
-          workspace: "./src/CSharp/EasyMicroservices.Database.sln"
+          workspace: "./EasyMicroservices.Database.sln"
       - name: Test
-        run: dotnet test ./src/CSharp/EasyMicroservices.Database.sln
+        run: dotnet test EasyMicroservices.Database.sln
       - name:  Test to generate Code Coverage Report
-        working-directory: ./src/CSharp
         run: |
           dotnet build ./EasyMicroservices.Database.sln
           dotnet tool install --global coverlet.console
@@ -35,8 +36,8 @@ jobs:
       - name: OpenCover Badge Generator
         uses: danpetitt/open-cover-badge-generator-action@v1.0.9
         with:
-          path-to-opencover-xml: ./src/CSharp/coverage.opencover.xml
-          path-to-badges: ./src/CSharp
+          path-to-opencover-xml: ./src/CSharp/EasyMicroservices.Database/coverage.opencover.xml
+          path-to-badges: ./src/CSharp/EasyMicroservices.Database
           minimum-coverage: 50
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit files

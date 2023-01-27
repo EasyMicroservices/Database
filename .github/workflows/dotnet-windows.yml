@@ -9,6 +9,9 @@ on:
 jobs:
   os-tests:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./src/CSharp/EasyMicroservices.Database
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -20,8 +23,8 @@ jobs:
             6.0.x
             7.0.x
       - name: Restore dependencies
-        run: dotnet restore ./src/CSharp/EasyMicroservices.Database.sln
+        run: dotnet restore ./EasyMicroservices.Database.sln
       - name: Build
-        run: dotnet build ./src/CSharp/EasyMicroservices.Database.sln --no-restore
+        run: dotnet build ./EasyMicroservices.Database.sln --no-restore
       - name: Test
-        run: dotnet test ./src/CSharp/EasyMicroservices.Database.sln --no-build --verbosity normal
+        run: dotnet test ./EasyMicroservices.Database.sln --no-build --verbosity normal
