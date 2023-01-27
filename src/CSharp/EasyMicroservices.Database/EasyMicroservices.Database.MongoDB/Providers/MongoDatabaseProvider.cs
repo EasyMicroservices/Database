@@ -1,25 +1,26 @@
 ﻿using EasyMicroservices.Database.Interfaces;
 using EasyMicroservices.Database.Providers;
-using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
 
-namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
+namespace EasyMicroservices.Database.MongoDB.Providers
 {
     /// <summary>
     /// 
     /// </summary>
-    public class EntityFrameworkCoreDatabaseProvider : IDatabase, IAsyncDisposable
+    public class MongoDatabaseProvider : IDatabase, IAsyncDisposable
     {
-        private readonly DbContext _dbContext;
+        private readonly IMongoDatabase _mongoDatabase;
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="dbContext"></param>
-        public EntityFrameworkCoreDatabaseProvider(DbContext dbContext)
+        /// <param name="mongoDatabase"></param>
+        public MongoDatabaseProvider(IMongoDatabase mongoDatabase)
         {
-            _dbContext = dbContext;
+            _mongoDatabase = mongoDatabase;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,7 +39,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <exception cref="NotImplementedException"></exception>
         public IEasyReadableQueryableAsync<TEntity> GetReadableOf<TEntity>() where TEntity : class
         {
-            return new EntityFrameworkCoreReadableQueryableProvider<TEntity>(_dbContext.Set<TEntity>());
+            return new MongoReadableQueryableProvider<TEntity>(_mongoDatabase.GetCollection<TEntity>(typeof(TEntity).Name).AsQueryable());
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <exception cref="NotImplementedException"></exception>
         public IEasyWritableQueryableAsync<TEntity> GetWritableOf<TEntity>() where TEntity : class
         {
-            return new EntityFrameworkCoreWritableQueryableProvider<TEntity>(_dbContext);
+            return new MongoWritableQueryableProvider<TEntity>(_mongoDatabase.GetCollection<TEntity>(typeof(TEntity).Name));
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <returns></returns>
         public ValueTask DisposeAsync()
         {
-            return _dbContext.DisposeAsync();
+            return ValueTask.CompletedTask;
         }
     }
 }

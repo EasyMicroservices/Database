@@ -14,7 +14,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
     /// 
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class EntityframeworkCoreReadableQueryableProvider<TEntity> : IEasyReadableQueryableAsync<TEntity>
+    public class EntityFrameworkCoreReadableQueryableProvider<TEntity> : IEasyReadableQueryableAsync<TEntity>
         where TEntity : class
     {
         private readonly IQueryable<TEntity> _queryable;
@@ -22,7 +22,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// 
         /// </summary>
         /// <param name="queryable"></param>
-        public EntityframeworkCoreReadableQueryableProvider(IQueryable<TEntity> queryable)
+        public EntityFrameworkCoreReadableQueryableProvider(IQueryable<TEntity> queryable)
         {
             _queryable = queryable;
         }

@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EasyMicroservices.Database.EntityFrameworkCore\EasyMicroservices.Database.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\EasyMicroservices.Database.MongoDB\EasyMicroservices.Database.MongoDB.csproj" />
   </ItemGroup>
 
 </Project>

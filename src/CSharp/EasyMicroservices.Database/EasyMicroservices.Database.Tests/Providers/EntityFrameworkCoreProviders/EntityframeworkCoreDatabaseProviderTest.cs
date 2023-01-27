@@ -5,7 +5,7 @@ namespace EasyMicroservices.Database.Tests.Providers.EntityFrameworkCoreProvider
 {
     public class EntityframeworkCoreDatabaseProviderTest : BaseDatabaseProviderTest
     {
-        public EntityframeworkCoreDatabaseProviderTest() : base(new EntityframeworkCoreDatabaseProvider(new TestDbContext()))
+        public EntityframeworkCoreDatabaseProviderTest() : base(new EntityFrameworkCoreDatabaseProvider(new TestDbContext()))
         {
 
         }

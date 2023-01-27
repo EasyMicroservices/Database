@@ -1,10 +1,11 @@
 ﻿using EasyMicroservices.Database.Tests.Database.Interfaces;
+using MongoDB.Bson;
 
-namespace EasyMicroservices.Database.Tests.Database.Entities
+namespace EasyMicroservices.Database.Tests.Database.MongoDBDocuments
 {
-    public class UserEntity : IUser
+    public class UserDocument : IUser
     {
-        public int Id { get; set; }
+        public ObjectId Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
