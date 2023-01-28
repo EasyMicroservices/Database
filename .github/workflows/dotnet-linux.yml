@@ -26,5 +26,7 @@ jobs:
         run: dotnet restore ./EasyMicroservices.Database.sln
       - name: Build
         run: dotnet build ./EasyMicroservices.Database.sln --no-restore
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
       - name: Test
         run: dotnet test ./EasyMicroservices.Database.sln --no-build --verbosity normal
