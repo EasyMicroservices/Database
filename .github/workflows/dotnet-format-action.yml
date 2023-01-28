@@ -26,6 +26,8 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           action: "fix"
           workspace: "./EasyMicroservices.Database.sln"
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
       - name: Test
         run: dotnet test EasyMicroservices.Database.sln
       - name:  Test to generate Code Coverage Report
