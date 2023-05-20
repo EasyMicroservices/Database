@@ -26,6 +26,6 @@ jobs:
       - name: Build
         run: dotnet build ./src/CSharp/EasyMicroservices.Database.sln --no-restore
       - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.8.0
+        uses: ankane/setup-mongodb@v1
       - name: Test
         run: dotnet test ./src/CSharp/EasyMicroservices.Database.sln --no-build --verbosity normal
