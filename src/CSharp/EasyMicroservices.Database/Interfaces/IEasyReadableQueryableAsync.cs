@@ -11,7 +11,7 @@ namespace EasyMicroservices.Database.Interfaces
     /// queryies of database
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IEasyReadableQueryableAsync<TEntity>: IQueryable<TEntity>
+    public interface IEasyReadableQueryableAsync<TEntity> : IQueryable<TEntity>
         where TEntity : class
     {
         /// <summary>

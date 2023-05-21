@@ -44,7 +44,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         public async Task<IEntityEntry<TEntity>> RemoveAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             var removeItems = await _context.Set<TEntity>().Where(predicate).ToListAsync(cancellationToken);
-             _context.Set<TEntity>().RemoveRange(removeItems);
+            _context.Set<TEntity>().RemoveRange(removeItems);
             return null;
         }
 
