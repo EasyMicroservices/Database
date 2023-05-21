@@ -26,6 +26,8 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           action: "fix"
           workspace: "./src/CSharp/EasyMicroservices.Database.sln"
+      - name: Start MongoDB
+        uses: ankane/setup-mongodb@v1
       - name: Test
         run:  |
           dotnet test ./src/CSharp/EasyMicroservices.Database.sln -f netcoreapp3.1
