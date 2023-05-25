@@ -34,5 +34,24 @@ namespace EasyMicroservices.Database.Tests.Providers
             await _queryable.SaveChangesAsync();
             Assert.True(await _queryable.AnyAsync(x => x.Name == name));
         }
+
+        [Theory]
+        [InlineData("Update Ali", "Update to reza")]
+        public virtual async Task UpdateAsync(string name, string updateToName)
+        {
+            if (await _queryable.AnyAsync(x => x.Name == name))
+                await _queryable.RemoveAllAsync(x => x.Name == name);
+            Assert.False(await _queryable.AnyAsync(x => x.Name == name));
+            var result = await _queryable.AddAsync(new TUser()
+            {
+                Name = name
+            });
+            await _queryable.SaveChangesAsync();
+            var find = await _queryable.FirstOrDefaultAsync(x => x.Name == name);
+            Assert.NotNull(find);
+            find.Name = updateToName;
+            await _queryable.Update(find);
+            Assert.True(await _queryable.AnyAsync(x => x.Name == updateToName));
+        }
     }
 }
