@@ -84,6 +84,18 @@ namespace EasyMicroservices.Database.Providers
         {
             return _writable.SaveChangesAsync(cancellationToken);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IEntityEntry<TEntity>> Update(TEntity entity, CancellationToken cancellationToken = default)
+        {
+            var updateResult = await _writable.Update(entity, cancellationToken);
+            await _writable.SaveChangesAsync();
+            return updateResult;
+        }
 
         #endregion
 

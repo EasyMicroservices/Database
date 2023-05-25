@@ -70,5 +70,17 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         {
             return _context.SaveChangesAsync(cancellationToken);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEntityEntry<TEntity>> Update(TEntity entity, CancellationToken cancellationToken = default)
+        {
+            var result = _context.Set<TEntity>().Update(entity);
+            return Task.FromResult((IEntityEntry<TEntity>)new EntityEntryProvider<TEntity>(result));
+        }
     }
 }
