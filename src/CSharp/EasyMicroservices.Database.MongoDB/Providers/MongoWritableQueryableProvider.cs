@@ -1,7 +1,8 @@
 ﻿using EasyMicroservices.Database.Interfaces;
+using EasyMicroservices.Database.MongoDB.Interfaces;
 using MongoDB.Driver;
-using System.Linq.Expressions;
 using System;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -59,6 +60,23 @@ namespace EasyMicroservices.Database.MongoDB.Providers
             return new DocumentEntryProvider<TEntity>(null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IEntityEntry<TEntity>> Update(TEntity entity, CancellationToken cancellationToken = default)
+        {
+            if (entity is IMongoDocument mongoDocument)
+            {
+                var filter = Builders<TEntity>.Filter.Eq("_id", mongoDocument.Id);
+                await _mongoCollection.ReplaceOneAsync(filter, entity, (ReplaceOptions)null, cancellationToken);
+                return new DocumentEntryProvider<TEntity>(entity);
+            }
+            else
+                throw new Exception("I cannot update the document please inherit your document from IMongoDocument");
+        }
         /// <summary>
         /// 
         /// </summary>
