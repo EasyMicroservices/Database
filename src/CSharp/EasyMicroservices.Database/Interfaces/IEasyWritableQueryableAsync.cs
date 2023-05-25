@@ -35,6 +35,13 @@ namespace EasyMicroservices.Database.Interfaces
         /// <returns></returns>
         Task<IEntityEntry<TEntity>> RemoveAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
         /// <summary>
+        /// update entity
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<IEntityEntry<TEntity>> Update(TEntity entity, CancellationToken cancellationToken = default);
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="cancellationToken"></param>
