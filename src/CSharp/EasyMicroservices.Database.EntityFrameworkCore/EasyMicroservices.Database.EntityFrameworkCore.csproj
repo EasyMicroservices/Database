@@ -6,7 +6,7 @@
     <Authors>EasyMicroservices</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.0.0.2</Version>
-    <Description>Manage your files with a wrapper in everywhere.</Description>
+    <Description>Manage your ef core databases with a wrapper in everywhere.</Description>
     <Copyright>EasyMicroservices@gmail.com</Copyright>
     <PackageTags>database</PackageTags>
     <PackageProjectUrl>https://github.com/EasyMicroservices/Database</PackageProjectUrl>
