@@ -325,6 +325,8 @@ namespace EasyMicroservices.Database.Interfaces
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<TEntity[]> ToArrayAsync(CancellationToken cancellationToken = default(CancellationToken));
+
+
         //public IIncludableQueryable<TEntity, TProperty> Include<TEntity, TProperty>(IQueryable<TEntity> source, Expression<Func<TEntity, TProperty>> navigationPropertyPath) where TEntity : class;
         //public IIncludableQueryable<TEntity, TProperty> ThenInclude<TEntity, TPreviousProperty, TProperty>(IIncludableQueryable<TEntity, IEnumerable<TPreviousProperty>> source, Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath) where TEntity : class;
         //public IIncludableQueryable<TEntity, TProperty> ThenInclude<TEntity, TPreviousProperty, TProperty>(IIncludableQueryable<TEntity, TPreviousProperty> source, Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath) where TEntity : class;
@@ -337,7 +339,12 @@ namespace EasyMicroservices.Database.Interfaces
         //public IQueryable<TEntity> AsTracking<TEntity>(IQueryable<TEntity> source, QueryTrackingBehavior track) where TEntity : class;
         //public IQueryable<T> TagWith<T>(IQueryable<T> source, string tag);
         //public IQueryable<T> TagWithCallSite<T>(IQueryable<T> source, string? filePath = null, int lineNumber = 0);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public IEasyReadableQueryableAsync<TEntity> ConvertToReadable(IQueryable<TEntity> query);
         /// <summary>
         /// 
         /// </summary>

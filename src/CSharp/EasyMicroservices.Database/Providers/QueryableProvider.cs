@@ -594,6 +594,15 @@ namespace EasyMicroservices.Database.Providers
         {
             return _readable.GetEnumerator();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public IEasyReadableQueryableAsync<TEntity> ConvertToReadable(IQueryable<TEntity> query)
+        {
+            return _readable.ConvertToReadable(query);
+        }
 
         #endregion
     }

@@ -1,6 +1,7 @@
 ﻿using EasyMicroservices.Database.MongoDB.Interfaces;
 using EasyMicroservices.Database.Tests.Database.Interfaces;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace EasyMicroservices.Database.Tests.Database.MongoDBDocuments
 {
@@ -10,5 +11,7 @@ namespace EasyMicroservices.Database.Tests.Database.MongoDBDocuments
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public List<PostDocument> Posts { get; set; }
     }
 }
