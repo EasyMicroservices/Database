@@ -201,6 +201,17 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         {
             return Task.FromResult(_queryable.Contains(item));
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public IEasyReadableQueryableAsync<TEntity> ConvertToReadable(IQueryable<TEntity> query)
+        {
+            return new MongoReadableQueryableProvider<TEntity>(query);
+        }
+
         /// <summary>
         /// 
         /// </summary>

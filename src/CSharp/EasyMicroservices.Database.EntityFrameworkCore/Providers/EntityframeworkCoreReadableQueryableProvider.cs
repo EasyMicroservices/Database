@@ -530,5 +530,15 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         {
             return _queryable.GetEnumerator();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public IEasyReadableQueryableAsync<TEntity> ConvertToReadable(IQueryable<TEntity> query)
+        {
+            return new EntityFrameworkCoreReadableQueryableProvider<TEntity>(query);
+        }
     }
 }
