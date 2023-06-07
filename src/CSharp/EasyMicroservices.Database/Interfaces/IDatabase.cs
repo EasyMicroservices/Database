@@ -1,9 +1,14 @@
-﻿namespace EasyMicroservices.Database.Interfaces
+﻿using System;
+
+namespace EasyMicroservices.Database.Interfaces
 {
     /// <summary>
     /// 
     /// </summary>
-    public interface IDatabase
+    public interface IDatabase : IDisposable
+        #if (!NET45 && !NETSTANDARD2_0)
+        ,IAsyncDisposable
+        #endif
     {
         /// <summary>
         /// 

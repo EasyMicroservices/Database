@@ -9,7 +9,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
     /// <summary>
     /// 
     /// </summary>
-    public class MongoDatabaseProvider : IDatabase, IAsyncDisposable
+    public class MongoDatabaseProvider : IDatabase
     {
         private readonly IMongoDatabase _mongoDatabase;
         /// <summary>
@@ -60,6 +60,13 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         public ValueTask DisposeAsync()
         {
             return ValueTask.CompletedTask;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
         }
     }
 }
