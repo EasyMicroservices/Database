@@ -9,7 +9,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
     /// <summary>
     /// 
     /// </summary>
-    public class EntityFrameworkCoreDatabaseProvider : IDatabase, IAsyncDisposable
+    public class EntityFrameworkCoreDatabaseProvider : IDatabase
     {
         private readonly DbContext _dbContext;
         /// <summary>
@@ -59,6 +59,14 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         public ValueTask DisposeAsync()
         {
             return _dbContext.DisposeAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            _dbContext.Dispose();
         }
     }
 }
