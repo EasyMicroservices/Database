@@ -6,9 +6,9 @@ namespace EasyMicroservices.Database.Interfaces
     /// 
     /// </summary>
     public interface IDatabase : IDisposable
-        #if (!NET45 && !NETSTANDARD2_0)
+#if (!NET45 && !NETSTANDARD2_0)
         ,IAsyncDisposable
-        #endif
+#endif
     {
         /// <summary>
         /// 
