@@ -1,4 +1,5 @@
 ﻿using EasyMicroservices.Database.Interfaces;
+using EasyMicroservices.Database.MongoDB.Implementations;
 using EasyMicroservices.Database.Providers;
 using MongoDB.Driver;
 using System;
@@ -28,7 +29,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <returns></returns>
         public IEasyQueryableAsync<TEntity> GetQueryOf<TEntity>() where TEntity : class
         {
-            return new QueryableProvider<TEntity>(GetReadableOf<TEntity>(), GetWritableOf<TEntity>());
+            return new QueryableProvider<TEntity>(new DatabaseContext(_mongoDatabase), GetReadableOf<TEntity>(), GetWritableOf<TEntity>());
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <exception cref="NotImplementedException"></exception>
         public IEasyReadableQueryableAsync<TEntity> GetReadableOf<TEntity>() where TEntity : class
         {
-            return new MongoReadableQueryableProvider<TEntity>(_mongoDatabase.GetCollection<TEntity>(typeof(TEntity).Name).AsQueryable());
+            return new MongoReadableQueryableProvider<TEntity>(new DatabaseContext(_mongoDatabase), _mongoDatabase.GetCollection<TEntity>(typeof(TEntity).Name).AsQueryable());
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <exception cref="NotImplementedException"></exception>
         public IEasyWritableQueryableAsync<TEntity> GetWritableOf<TEntity>() where TEntity : class
         {
-            return new MongoWritableQueryableProvider<TEntity>(_mongoDatabase.GetCollection<TEntity>(typeof(TEntity).Name));
+            return new MongoWritableQueryableProvider<TEntity>(new DatabaseContext(_mongoDatabase), _mongoDatabase.GetCollection<TEntity>(typeof(TEntity).Name));
         }
 
         /// <summary>

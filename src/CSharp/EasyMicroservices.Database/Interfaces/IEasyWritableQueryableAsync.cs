@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,7 +9,7 @@ namespace EasyMicroservices.Database.Interfaces
     /// 
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IEasyWritableQueryableAsync<TEntity>
+    public interface IEasyWritableQueryableAsync<TEntity> : IEasyQueryableBaseAsync
         where TEntity : class
     {
         /// <summary>

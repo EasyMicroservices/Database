@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using EasyMicroservices.Database.EntityFrameworkCore.Implementations;
 
 namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
 {
@@ -18,10 +19,15 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <summary>
         /// 
         /// </summary>
+        public IContext Context { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="context"></param>
         public EntityFrameworkCoreWritableQueryableProvider(DbContext context)
         {
             _context = context;
+            Context = new DatabaseContext(context);
         }
         /// <summary>
         /// 

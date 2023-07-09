@@ -19,11 +19,19 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <summary>
         /// 
         /// </summary>
+        public IContext Context { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         /// <param name="mongoCollection"></param>
-        public MongoWritableQueryableProvider(IMongoCollection<TEntity> mongoCollection)
+        public MongoWritableQueryableProvider(IContext context, IMongoCollection<TEntity> mongoCollection)
         {
             _mongoCollection = mongoCollection;
+            Context = context;
         }
+
         /// <summary>
         /// 
         /// </summary>

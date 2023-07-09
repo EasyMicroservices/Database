@@ -1,4 +1,5 @@
-﻿using EasyMicroservices.Database.Interfaces;
+﻿using EasyMicroservices.Database.EntityFrameworkCore.Implementations;
+using EasyMicroservices.Database.Interfaces;
 using EasyMicroservices.Database.Providers;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         {
             _dbContext = dbContext;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -27,7 +29,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <returns></returns>
         public IEasyQueryableAsync<TEntity> GetQueryOf<TEntity>() where TEntity : class
         {
-            return new QueryableProvider<TEntity>(GetReadableOf<TEntity>(), GetWritableOf<TEntity>());
+            return new QueryableProvider<TEntity>(new DatabaseContext(_dbContext), GetReadableOf<TEntity>(), GetWritableOf<TEntity>());
         }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <exception cref="NotImplementedException"></exception>
         public IEasyReadableQueryableAsync<TEntity> GetReadableOf<TEntity>() where TEntity : class
         {
-            return new EntityFrameworkCoreReadableQueryableProvider<TEntity>(_dbContext.Set<TEntity>());
+            return new EntityFrameworkCoreReadableQueryableProvider<TEntity>(new DatabaseContext(_dbContext), _dbContext.Set<TEntity>());
         }
 
         /// <summary>

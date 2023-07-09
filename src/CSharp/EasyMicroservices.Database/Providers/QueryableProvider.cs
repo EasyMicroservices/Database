@@ -20,12 +20,14 @@ namespace EasyMicroservices.Database.Providers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="context"></param>
         /// <param name="readable"></param>
         /// <param name="writable"></param>
-        public QueryableProvider(IEasyReadableQueryableAsync<TEntity> readable, IEasyWritableQueryableAsync<TEntity> writable)
+        public QueryableProvider(IContext context, IEasyReadableQueryableAsync<TEntity> readable, IEasyWritableQueryableAsync<TEntity> writable)
         {
             _readable = readable;
             _writable = writable;
+            Context = context;
         }
 
         /// <summary>
@@ -40,6 +42,10 @@ namespace EasyMicroservices.Database.Providers
         /// 
         /// </summary>
         public IQueryProvider Provider => _readable.Provider;
+        /// <summary>
+        /// 
+        /// </summary>
+        public IContext Context { get; set; }
 
         #region Writable
         /// <summary>

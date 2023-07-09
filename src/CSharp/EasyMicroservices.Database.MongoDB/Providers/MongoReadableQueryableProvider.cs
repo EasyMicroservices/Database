@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,10 +20,12 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="context"></param>
         /// <param name="queryable"></param>
-        public MongoReadableQueryableProvider(IQueryable<TEntity> queryable)
+        public MongoReadableQueryableProvider(IContext context, IQueryable<TEntity> queryable)
         {
             _queryable = queryable;
+            Context = context;
         }
         /// <summary>
         /// 
@@ -38,6 +39,11 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// 
         /// </summary>
         public IQueryProvider Provider => _queryable.Provider;
+        /// <summary>
+        /// 
+        /// </summary>
+        public IContext Context { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -209,7 +215,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <returns></returns>
         public IEasyReadableQueryableAsync<TEntity> ConvertToReadable(IQueryable<TEntity> query)
         {
-            return new MongoReadableQueryableProvider<TEntity>(query);
+            return new MongoReadableQueryableProvider<TEntity>(Context, query);
         }
 
         /// <summary>

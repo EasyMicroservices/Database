@@ -21,10 +21,12 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="context"></param>
         /// <param name="queryable"></param>
-        public EntityFrameworkCoreReadableQueryableProvider(IQueryable<TEntity> queryable)
+        public EntityFrameworkCoreReadableQueryableProvider(IContext context, IQueryable<TEntity> queryable)
         {
             _queryable = queryable;
+            Context = context;
         }
         /// <summary>
         /// 
@@ -38,6 +40,10 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// 
         /// </summary>
         public IQueryProvider Provider => _queryable.Provider;
+        /// <summary>
+        /// 
+        /// </summary>
+        public IContext Context { get; set; }
 
         #region QueryMethods
         /// <summary>
@@ -538,7 +544,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <returns></returns>
         public IEasyReadableQueryableAsync<TEntity> ConvertToReadable(IQueryable<TEntity> query)
         {
-            return new EntityFrameworkCoreReadableQueryableProvider<TEntity>(query);
+            return new EntityFrameworkCoreReadableQueryableProvider<TEntity>(Context, query);
         }
     }
 }
