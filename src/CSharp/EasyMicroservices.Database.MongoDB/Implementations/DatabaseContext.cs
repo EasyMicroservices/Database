@@ -23,5 +23,10 @@ namespace EasyMicroservices.Database.MongoDB.Implementations
         {
             return _dbContext.DatabaseNamespace.DatabaseName;
         }
+
+        public void ChangeModificationPropertyState<T>(T entity, string property, bool isModified) where T : class
+        {
+
+        }
     }
 }
