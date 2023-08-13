@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EasyMicroservices.Database.MongoDB.Implementations
@@ -27,6 +28,11 @@ namespace EasyMicroservices.Database.MongoDB.Implementations
         public void ChangeModificationPropertyState<T>(T entity, string property, bool isModified) where T : class
         {
 
+        }
+
+        public Task Reload<T>(T entity, CancellationToken cancellationToken) where T : class
+        {
+            return Task.CompletedTask;
         }
     }
 }

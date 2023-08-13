@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EasyMicroservices.Database.Interfaces
 {
@@ -24,6 +26,14 @@ namespace EasyMicroservices.Database.Interfaces
         /// <param name="property"></param>
         /// <param name="isModified"></param>
         void ChangeModificationPropertyState<T>(T entity, string property, bool isModified)
+            where T : class;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="cancellationToken"></param>
+        Task Reload<T>(T entity, CancellationToken cancellationToken)
             where T : class;
     }
 }
