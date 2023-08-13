@@ -1,6 +1,8 @@
 ﻿using EasyMicroservices.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
 {
@@ -30,6 +32,11 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
             where T : class
         {
             _dbContext.Entry(entity).Property(property).IsModified = isModified;
+        }
+
+        public Task Reload<T>(T entity, CancellationToken cancellationToken) where T : class
+        {
+            return _dbContext.Entry(entity).ReloadAsync(cancellationToken);
         }
     }
 }
