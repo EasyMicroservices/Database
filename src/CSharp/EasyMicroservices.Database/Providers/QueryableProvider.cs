@@ -62,6 +62,17 @@ namespace EasyMicroservices.Database.Providers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEnumerable<IEntityEntry<TEntity>>> AddBulkAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            return _writable.AddBulkAsync(entities, cancellationToken);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="predicate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
@@ -96,9 +107,22 @@ namespace EasyMicroservices.Database.Providers
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<IEntityEntry<TEntity>> Update(TEntity entity, CancellationToken cancellationToken = default)
+        public async Task<IEntityEntry<TEntity>> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            var updateResult = await _writable.Update(entity, cancellationToken);
+            var updateResult = await _writable.UpdateAsync(entity, cancellationToken);
+            await _writable.SaveChangesAsync();
+            return updateResult;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<IEntityEntry<TEntity>>> UpdateBulkAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            var updateResult = await _writable.UpdateBulkAsync(entities, cancellationToken);
             await _writable.SaveChangesAsync();
             return updateResult;
         }

@@ -50,7 +50,7 @@ namespace EasyMicroservices.Database.Tests.Providers
             var find = await Queryable.FirstOrDefaultAsync(x => x.Name == name);
             Assert.NotNull(find);
             find.Name = updateToName;
-            await Queryable.Update(find);
+            await Queryable.UpdateAsync(find);
             Assert.True(await Queryable.AnyAsync(x => x.Name == updateToName));
         }
     }

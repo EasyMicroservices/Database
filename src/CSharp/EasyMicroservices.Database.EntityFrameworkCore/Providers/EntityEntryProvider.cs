@@ -12,6 +12,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
     {
 
         EntityEntry<TEntity> _entityEntry;
+        TEntity _entity;
         /// <summary>
         /// 
         /// </summary>
@@ -23,11 +24,19 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="entity"></param>
+        public EntityEntryProvider(TEntity entity)
+        {
+            _entity = entity;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         public TEntity Entity
         {
             get
             {
-                return _entityEntry.Entity;
+                return _entityEntry.Entity ?? _entity;
             }
         }
     }

@@ -1,7 +1,10 @@
 ﻿using EasyMicroservices.Database.Interfaces;
 using EasyMicroservices.Database.MongoDB.Interfaces;
 using MongoDB.Driver;
+using SharpCompress.Common;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -74,7 +77,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<IEntityEntry<TEntity>> Update(TEntity entity, CancellationToken cancellationToken = default)
+        public async Task<IEntityEntry<TEntity>> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             if (entity is IMongoDocument mongoDocument)
             {
@@ -93,6 +96,42 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             return Task.FromResult(1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<IEntityEntry<TEntity>>> AddBulkAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            await _mongoCollection.InsertManyAsync(entities);
+            return entities.Select(x => new DocumentEntryProvider<TEntity>(x));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<IEntityEntry<TEntity>>> UpdateBulkAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            var updates = new List<WriteModel<TEntity>>();
+            var filterBuilder = Builders<TEntity>.Filter;
+
+            foreach (var doc in entities)
+            {
+                if (doc is IMongoDocument document)
+                {
+                    var filter = filterBuilder.Where(x => ((IMongoDocument)x).Id == document.Id);
+                    updates.Add(new ReplaceOneModel<TEntity>(filter, doc));
+                }
+            }
+
+            var result = await _mongoCollection.BulkWriteAsync(updates);
+            return entities.Select(x => new DocumentEntryProvider<TEntity>(x));
         }
     }
 }

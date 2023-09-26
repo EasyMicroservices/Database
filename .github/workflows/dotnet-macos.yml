@@ -15,12 +15,8 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version:  |
-            3.1.x
-            5.0.x
             6.0.x
             7.0.x
-      - name: Install Android
-        run: dotnet workload install android
       - name: Restore dependencies
         run: dotnet restore ./src/CSharp/EasyMicroservices.Database.sln
       - name: Build
@@ -29,6 +25,5 @@ jobs:
         uses: ankane/setup-mongodb@v1
       - name: Test
         run:  |
-          dotnet test ./src/CSharp/EasyMicroservices.Database.sln --no-build --verbosity normal -f netcoreapp3.1
           dotnet test ./src/CSharp/EasyMicroservices.Database.sln --no-build --verbosity normal -f net6.0
-          dotnet test ./src/CSharp/EasyMicroservices.Database.sln --no-build --verbosity normal -f net5.0
+          dotnet test ./src/CSharp/EasyMicroservices.Database.sln --no-build --verbosity normal -f net7.0
