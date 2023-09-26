@@ -101,7 +101,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
             await _context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
             return entities.Select(x => (IEntityEntry<TEntity>)new EntityEntryProvider<TEntity>(x));
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
