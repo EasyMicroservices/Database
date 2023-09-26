@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +21,13 @@ namespace EasyMicroservices.Database.Interfaces
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<IEnumerable<IEntityEntry<TEntity>>> AddBulkAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="predicate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
@@ -37,7 +45,14 @@ namespace EasyMicroservices.Database.Interfaces
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IEntityEntry<TEntity>> Update(TEntity entity, CancellationToken cancellationToken = default);
+        Task<IEntityEntry<TEntity>> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<IEnumerable<IEntityEntry<TEntity>>> UpdateBulkAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>

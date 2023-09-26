@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using EasyMicroservices.Database.EntityFrameworkCore.Implementations;
+using System.Collections.Generic;
 
 namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
 {
@@ -83,10 +84,34 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<IEntityEntry<TEntity>> Update(TEntity entity, CancellationToken cancellationToken = default)
+        public Task<IEntityEntry<TEntity>> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             var result = _context.Set<TEntity>().Update(entity);
             return Task.FromResult((IEntityEntry<TEntity>)new EntityEntryProvider<TEntity>(result));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<IEntityEntry<TEntity>>> AddBulkAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            await _context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
+            return entities.Select(x => (IEntityEntry<TEntity>)new EntityEntryProvider<TEntity>(x));
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEnumerable<IEntityEntry<TEntity>>> UpdateBulkAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            _context.Set<TEntity>().UpdateRange(entities);
+            return Task.FromResult(entities.Select(x => (IEntityEntry<TEntity>)new EntityEntryProvider<TEntity>(x)));
         }
     }
 }
