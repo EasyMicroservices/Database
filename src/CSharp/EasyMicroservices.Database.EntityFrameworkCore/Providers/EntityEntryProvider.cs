@@ -36,7 +36,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         {
             get
             {
-                return _entityEntry.Entity ?? _entity;
+                return _entity ?? _entityEntry.Entity;
             }
         }
     }
