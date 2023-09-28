@@ -546,5 +546,22 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         {
             return new EntityFrameworkCoreReadableQueryableProvider<TEntity>(Context, query);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual void Dispose()
+        {
+            Context.Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public virtual ValueTask DisposeAsync()
+        {
+            return Context.DisposeAsync();
+        }
     }
 }

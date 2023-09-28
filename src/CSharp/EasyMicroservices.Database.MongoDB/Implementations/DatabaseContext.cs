@@ -1,9 +1,6 @@
 ﻿using EasyMicroservices.Database.Interfaces;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,6 +30,25 @@ namespace EasyMicroservices.Database.MongoDB.Implementations
         public Task Reload<T>(T entity, CancellationToken cancellationToken) where T : class
         {
             return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual void Dispose()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public ValueTask DisposeAsync()
+        {
+            return ValueTask.CompletedTask;
         }
     }
 }
