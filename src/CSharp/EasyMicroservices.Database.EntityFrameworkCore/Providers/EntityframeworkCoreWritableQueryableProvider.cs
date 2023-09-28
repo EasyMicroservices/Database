@@ -113,5 +113,24 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
             _context.Set<TEntity>().UpdateRange(entities);
             return Task.FromResult(entities.Select(x => (IEntityEntry<TEntity>)new EntityEntryProvider<TEntity>(x)));
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual void Dispose()
+        {
+            Context.Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public ValueTask DisposeAsync()
+        {
+            return Context.DisposeAsync();
+        }
     }
 }

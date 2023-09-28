@@ -597,5 +597,24 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         {
             return _queryable.GetEnumerator();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual void Dispose()
+        {
+            Context.Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public ValueTask DisposeAsync()
+        {
+            return Context.DisposeAsync();
+        }
     }
 }

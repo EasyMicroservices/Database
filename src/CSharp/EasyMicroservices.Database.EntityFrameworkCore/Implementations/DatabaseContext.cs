@@ -38,5 +38,15 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
         {
             return _dbContext.Entry(entity).ReloadAsync(cancellationToken);
         }
+
+        public void Dispose()
+        {
+            _dbContext.Dispose();
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            return _dbContext.DisposeAsync();
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using EasyMicroservices.Database.Interfaces;
 using EasyMicroservices.Database.MongoDB.Interfaces;
 using MongoDB.Driver;
-using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,6 +131,25 @@ namespace EasyMicroservices.Database.MongoDB.Providers
 
             var result = await _mongoCollection.BulkWriteAsync(updates);
             return entities.Select(x => new DocumentEntryProvider<TEntity>(x));
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual void Dispose()
+        {
+            Context.Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public ValueTask DisposeAsync()
+        {
+            return Context.DisposeAsync();
         }
     }
 }

@@ -7,7 +7,10 @@ namespace EasyMicroservices.Database.Interfaces
     /// <summary>
     /// 
     /// </summary>
-    public interface IContext
+    public interface IContext : IDisposable
+#if (!NETSTANDARD2_0 && !NET45)
+, IAsyncDisposable
+#endif
     {
         /// <summary>
         /// database context type

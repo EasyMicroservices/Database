@@ -635,5 +635,25 @@ namespace EasyMicroservices.Database.Providers
         }
 
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual void Dispose()
+        {
+            Context.Dispose();
+        }
+
+#if (!NETSTANDARD2_0 && !NET45)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public virtual ValueTask DisposeAsync()
+        {
+            return Context.DisposeAsync();
+        }
+#endif
     }
 }
