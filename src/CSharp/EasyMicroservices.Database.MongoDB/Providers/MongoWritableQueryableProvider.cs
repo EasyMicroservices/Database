@@ -132,7 +132,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
             var result = await _mongoCollection.BulkWriteAsync(updates);
             return entities.Select(x => new DocumentEntryProvider<TEntity>(x));
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
