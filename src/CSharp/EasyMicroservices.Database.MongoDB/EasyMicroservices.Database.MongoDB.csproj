@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Authors>EasyMicroservices</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.0.10</Version>
+    <Version>0.0.0.12</Version>
     <Description>Manage your mongodb databases with a wrapper in everywhere.</Description>
     <Copyright>EasyMicroservices@gmail.com</Copyright>
     <PackageTags>database,mongodb,nosql</PackageTags>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
   </ItemGroup>
 
   <ItemGroup>
