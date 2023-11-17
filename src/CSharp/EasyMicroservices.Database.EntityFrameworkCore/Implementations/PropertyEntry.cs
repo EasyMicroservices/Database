@@ -16,6 +16,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
         {
             _PropertyEntry = propertyEntry;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -30,6 +31,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
                 _PropertyEntry.IsTemporary = value;
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -42,6 +44,47 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
             set
             {
                 _PropertyEntry.IsModified = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object OrginalValue
+        {
+            get
+            {
+                return _PropertyEntry.OriginalValue;
+            }
+            set
+            {
+                _PropertyEntry.OriginalValue = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object CurrentValue
+        {
+            get
+            {
+                return _PropertyEntry.CurrentValue;
+            }
+            set
+            {
+                _PropertyEntry.CurrentValue = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IProperty Metadata
+        {
+            get
+            {
+                return new Property(_PropertyEntry.Metadata);
             }
         }
     }

@@ -41,6 +41,13 @@ namespace EasyMicroservices.Database.Interfaces
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        IEnumerable<IPropertyEntry> GetProperties(object entity);
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>

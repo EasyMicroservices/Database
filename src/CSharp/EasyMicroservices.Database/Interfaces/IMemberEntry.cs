@@ -9,5 +9,10 @@
         /// 
         /// </summary>
         public bool IsModified { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object CurrentValue { get; set; }
     }
 }

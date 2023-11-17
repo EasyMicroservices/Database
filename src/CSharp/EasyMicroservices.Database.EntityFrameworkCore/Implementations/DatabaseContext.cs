@@ -41,6 +41,11 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
             return _dbContext.Entry(entity).Properties.Select(x => new PropertyEntry(x));
         }
 
+        public IEnumerable<IPropertyEntry> GetProperties(object entity)
+        {
+            return _dbContext.Entry(entity).Properties.Select(x => new PropertyEntry(x));
+        }
+
         public Task Reload<T>(T entity, CancellationToken cancellationToken) where T : class
         {
             return _dbContext.Entry(entity).ReloadAsync(cancellationToken);
