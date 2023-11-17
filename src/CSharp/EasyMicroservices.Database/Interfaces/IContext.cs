@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,6 +30,13 @@ namespace EasyMicroservices.Database.Interfaces
         /// <param name="property"></param>
         /// <param name="isModified"></param>
         void ChangeModificationPropertyState<T>(T entity, string property, bool isModified)
+            where T : class;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        IEnumerable<IPropertyEntry> GetProperties<T>(T entity)
             where T : class;
         /// <summary>
         /// 

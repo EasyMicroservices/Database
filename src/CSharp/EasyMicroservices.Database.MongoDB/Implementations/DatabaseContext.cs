@@ -1,6 +1,8 @@
 ﻿using EasyMicroservices.Database.Interfaces;
 using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +27,11 @@ namespace EasyMicroservices.Database.MongoDB.Implementations
         public void ChangeModificationPropertyState<T>(T entity, string property, bool isModified) where T : class
         {
 
+        }
+
+        public IEnumerable<IPropertyEntry> GetProperties<T>(T entity) where T : class
+        {
+            return Enumerable.Empty<IPropertyEntry>();
         }
 
         public Task Reload<T>(T entity, CancellationToken cancellationToken) where T : class
