@@ -40,4 +40,40 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
             }
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EntityEntryProvider : IEntityEntry
+    {
+
+        EntityEntry _entityEntry;
+        object _entity;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entityEntry"></param>
+        public EntityEntryProvider(EntityEntry entityEntry)
+        {
+            _entityEntry = entityEntry;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        public EntityEntryProvider(object entity)
+        {
+            _entity = entity;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Entity
+        {
+            get
+            {
+                return _entity ?? _entityEntry.Entity;
+            }
+        }
+    }
 }

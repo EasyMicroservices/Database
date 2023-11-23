@@ -39,6 +39,11 @@ namespace EasyMicroservices.Database.MongoDB.Implementations
             return Enumerable.Empty<IPropertyEntry>();
         }
 
+        public IEnumerable<IEntityEntry> GetTrackerEntities()
+        {
+            return Enumerable.Empty<IEntityEntry>();
+        }
+
         public Task Reload<T>(T entity, CancellationToken cancellationToken) where T : class
         {
             return Task.CompletedTask;

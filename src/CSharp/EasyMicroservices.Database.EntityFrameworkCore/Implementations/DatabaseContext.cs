@@ -1,4 +1,5 @@
-﻿using EasyMicroservices.Database.Interfaces;
+﻿using EasyMicroservices.Database.EntityFrameworkCore.Providers;
+using EasyMicroservices.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,11 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
         public IEnumerable<IPropertyEntry> GetProperties(object entity)
         {
             return _dbContext.Entry(entity).Properties.Select(x => new PropertyEntry(x));
+        }
+
+        public IEnumerable<IEntityEntry> GetTrackerEntities()
+        {
+            return _dbContext.ChangeTracker.Entries().Select(x => new EntityEntryProvider(x));
         }
 
         public Task Reload<T>(T entity, CancellationToken cancellationToken) where T : class
