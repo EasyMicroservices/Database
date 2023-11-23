@@ -5,6 +5,7 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Authors>EasyMicroservices</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
     <Version>0.0.0.15</Version>
     <Description>Manage your mongodb databases with a wrapper in everywhere.</Description>
     <Copyright>EasyMicroservices@gmail.com</Copyright>
