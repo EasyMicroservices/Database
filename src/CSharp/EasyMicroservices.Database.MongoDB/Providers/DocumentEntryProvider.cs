@@ -31,4 +31,31 @@ namespace EasyMicroservices.Database.MongoDB.Providers
             }
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DocumentEntryProvider : IEntityEntry
+    {
+        object _entity;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        public DocumentEntryProvider(object entity)
+        {
+            _entity = entity;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Entity
+        {
+            get
+            {
+                return _entity;
+            }
+        }
+    }
 }

@@ -44,7 +44,11 @@ namespace EasyMicroservices.Database.Interfaces
         /// <param name="entity"></param>
         /// <returns></returns>
         IEnumerable<IPropertyEntry> GetProperties(object entity);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<IEntityEntry> GetTrackerEntities();
         /// <summary>
         /// 
         /// </summary>

@@ -15,4 +15,15 @@ namespace EasyMicroservices.Database.Interfaces
         /// </summary>
         public TEntity Entity { get; }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IEntityEntry
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Entity { get; }
+    }
 }
