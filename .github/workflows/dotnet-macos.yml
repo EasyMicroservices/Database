@@ -17,6 +17,7 @@ jobs:
           dotnet-version:  |
             6.0.x
             7.0.x
+            8.0.x
       - name: Restore dependencies
         run: dotnet restore ./src/CSharp/EasyMicroservices.Database.sln
       - name: Build
@@ -27,3 +28,4 @@ jobs:
         run:  |
           dotnet test ./src/CSharp/EasyMicroservices.Database.sln --no-build --verbosity normal -f net6.0
           dotnet test ./src/CSharp/EasyMicroservices.Database.sln --no-build --verbosity normal -f net7.0
+          dotnet test ./src/CSharp/EasyMicroservices.Database.sln --no-build --verbosity normal -f net8.0
