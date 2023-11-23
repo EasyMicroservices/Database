@@ -1,4 +1,6 @@
-﻿using EasyMicroservices.Database.Interfaces;
+﻿using EasyMicroservices.Database.DataTypes;
+using EasyMicroservices.Database.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
@@ -39,6 +41,22 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
                 return _entity ?? _entityEntry.Entity;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityStateType EntityState
+        {
+            get
+            {
+                return (EntityStateType)(_entityEntry?.State).GetValueOrDefault();
+            }
+            set
+            {
+                if (_entityEntry != null)
+                    _entityEntry.State = (EntityState)value;
+            }
+        }
     }
 
     /// <summary>
@@ -73,6 +91,22 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
             get
             {
                 return _entity ?? _entityEntry.Entity;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityStateType EntityState
+        {
+            get
+            {
+                return (EntityStateType)(_entityEntry?.State).GetValueOrDefault();
+            }
+            set
+            {
+                if (_entityEntry != null)
+                    _entityEntry.State = (EntityState)value;
             }
         }
     }

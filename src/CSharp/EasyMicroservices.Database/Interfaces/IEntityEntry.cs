@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyMicroservices.Database.DataTypes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,7 +14,11 @@ namespace EasyMicroservices.Database.Interfaces
         /// <summary>
         /// 
         /// </summary>
-        public TEntity Entity { get; }
+        TEntity Entity { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        EntityStateType EntityState { get; set; }
     }
 
     /// <summary>
@@ -24,6 +29,10 @@ namespace EasyMicroservices.Database.Interfaces
         /// <summary>
         /// 
         /// </summary>
-        public object Entity { get; }
+        object Entity { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        EntityStateType EntityState { get; set; }
     }
 }

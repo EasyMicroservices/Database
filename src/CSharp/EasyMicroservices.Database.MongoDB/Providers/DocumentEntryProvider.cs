@@ -1,4 +1,5 @@
-﻿using EasyMicroservices.Database.Interfaces;
+﻿using EasyMicroservices.Database.DataTypes;
+using EasyMicroservices.Database.Interfaces;
 
 namespace EasyMicroservices.Database.MongoDB.Providers
 {
@@ -30,6 +31,10 @@ namespace EasyMicroservices.Database.MongoDB.Providers
                 return _entity;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityStateType EntityState { get; set; }
     }
 
     /// <summary>
@@ -57,5 +62,9 @@ namespace EasyMicroservices.Database.MongoDB.Providers
                 return _entity;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityStateType EntityState { get; set; }
     }
 }
