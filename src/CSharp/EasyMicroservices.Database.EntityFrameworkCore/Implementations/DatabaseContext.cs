@@ -1,4 +1,5 @@
-﻿using EasyMicroservices.Database.EntityFrameworkCore.Providers;
+﻿using EasyMicroservices.Database.DataTypes;
+using EasyMicroservices.Database.EntityFrameworkCore.Providers;
 using EasyMicroservices.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -35,6 +36,18 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
             where T : class
         {
             _dbContext.Entry(entity).Property(property).IsModified = isModified;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="entityStateType"></param>
+        public void ChangeEntityState<T>(T entity, EntityStateType entityStateType)
+            where T : class
+        {
+            _dbContext.Entry(entity).State = (EntityState)entityStateType;
         }
 
         public IEnumerable<IPropertyEntry> GetProperties<T>(T entity) where T : class
