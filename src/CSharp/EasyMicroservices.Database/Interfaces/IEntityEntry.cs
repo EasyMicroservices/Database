@@ -31,21 +31,27 @@ namespace EasyMicroservices.Database.Interfaces
         /// </summary>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        Task ReloadAsync(string propertyName);
+        Task ReloadReferenceAsync(string propertyName);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        Task ReloadCollectionAsync(string propertyName);
         /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="TProperty"></typeparam>
         /// <param name="func"></param>
         /// <returns></returns>
-        IEntityEntry<TEntity> GetEntityEntry<TProperty>(Expression<Func<TEntity, IEnumerable<TProperty>>> func)
+        IEntityEntry<TEntity> GetEntityEntryReference<TProperty>(Expression<Func<TEntity, IEnumerable<TProperty>>> func)
             where TProperty : class;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        IEntityEntry GetEntityEntry(string propertyName);
+        IEntityEntry GetEntityEntryReference(string propertyName);
     }
 
     /// <summary>
@@ -71,12 +77,18 @@ namespace EasyMicroservices.Database.Interfaces
         /// </summary>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        Task ReloadAsync(string propertyName);
+        Task ReloadReferenceAsync(string propertyName);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        IEntityEntry GetEntityEntry(string propertyName);
+        Task ReloadCollectionAsync(string propertyName);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        IEntityEntry GetEntityEntryReference(string propertyName);
     }
 }
