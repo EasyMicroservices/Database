@@ -45,6 +45,14 @@ namespace EasyMicroservices.Database.Interfaces
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
+        /// <returns></returns>
+        public IEntityEntry Entry<T>(T entity)
+            where T : class;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
         IEnumerable<IPropertyEntry> GetProperties<T>(T entity)
             where T : class;
         /// <summary>

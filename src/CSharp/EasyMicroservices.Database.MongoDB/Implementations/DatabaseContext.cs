@@ -61,6 +61,11 @@ namespace EasyMicroservices.Database.MongoDB.Implementations
             return Task.CompletedTask;
         }
 
+        public IEntityEntry Entry<T>(T entity) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 
         /// </summary>

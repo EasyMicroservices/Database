@@ -2,6 +2,10 @@
 using EasyMicroservices.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
 {
@@ -57,6 +61,46 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
                     _entityEntry.State = (EntityState)value;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        public IEntityEntry<TEntity> GetEntityEntry<TProperty>(Expression<Func<TEntity, IEnumerable<TProperty>>> func)
+            where TProperty : class
+        {
+            return new EntityEntryProvider<TEntity>(_entityEntry.Collection(func).EntityEntry);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public IEntityEntry GetEntityEntry(string propertyName)
+        {
+            return new EntityEntryProvider(_entityEntry.Collection(propertyName).EntityEntry);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Task ReloadAsync()
+        {
+            return _entityEntry.ReloadAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public Task ReloadAsync(string propertyName)
+        {
+            return _entityEntry.Collection(propertyName).LoadAsync();
+        }
     }
 
     /// <summary>
@@ -108,6 +152,35 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
                 if (_entityEntry != null)
                     _entityEntry.State = (EntityState)value;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Task ReloadAsync()
+        {
+            return _entityEntry.ReloadAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public Task ReloadAsync(string propertyName)
+        {
+            return _entityEntry.Collection(propertyName).LoadAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public IEntityEntry GetEntityEntry(string propertyName)
+        {
+            return new EntityEntryProvider(_entityEntry.Collection(propertyName).EntityEntry);
         }
     }
 }
