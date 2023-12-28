@@ -70,7 +70,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         public IEntityEntry<TEntity> GetEntityEntry<TProperty>(Expression<Func<TEntity, IEnumerable<TProperty>>> func)
             where TProperty : class
         {
-            return new EntityEntryProvider<TEntity>(_entityEntry.Collection(func).EntityEntry);
+            return new EntityEntryProvider<TEntity>(_entityEntry.Property(func).EntityEntry);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <returns></returns>
         public IEntityEntry GetEntityEntry(string propertyName)
         {
-            return new EntityEntryProvider(_entityEntry.Collection(propertyName).EntityEntry);
+            return new EntityEntryProvider(_entityEntry.Property(propertyName).EntityEntry);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <returns></returns>
         public Task ReloadAsync(string propertyName)
         {
-            return _entityEntry.Collection(propertyName).LoadAsync();
+            return _entityEntry.Property(propertyName).EntityEntry.ReloadAsync();
         }
     }
 
@@ -170,7 +170,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <returns></returns>
         public Task ReloadAsync(string propertyName)
         {
-            return _entityEntry.Collection(propertyName).LoadAsync();
+            return _entityEntry.Property(propertyName).EntityEntry.ReloadAsync();
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Providers
         /// <returns></returns>
         public IEntityEntry GetEntityEntry(string propertyName)
         {
-            return new EntityEntryProvider(_entityEntry.Collection(propertyName).EntityEntry);
+            return new EntityEntryProvider(_entityEntry.Property(propertyName).EntityEntry);
         }
     }
 }
