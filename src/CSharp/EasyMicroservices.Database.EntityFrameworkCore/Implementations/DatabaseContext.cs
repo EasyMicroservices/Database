@@ -50,6 +50,17 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
             _dbContext.Entry(entity).State = (EntityState)entityStateType;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        public IEntityEntry Entry<T>(T entity)
+            where T : class
+        {
+            return new EntityEntryProvider(_dbContext.Entry(entity));
+        }
+
         public IEnumerable<IPropertyEntry> GetProperties<T>(T entity) where T : class
         {
             return _dbContext.Entry(entity).Properties.Select(x => new PropertyEntry(x));
