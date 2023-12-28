@@ -43,7 +43,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <param name="func"></param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public IEntityEntry<TEntity> GetEntityEntry<TProperty>(System.Linq.Expressions.Expression<System.Func<TEntity, System.Collections.Generic.IEnumerable<TProperty>>> func) where TProperty : class
+        public IEntityEntry<TEntity> GetEntityEntryReference<TProperty>(System.Linq.Expressions.Expression<System.Func<TEntity, System.Collections.Generic.IEnumerable<TProperty>>> func) where TProperty : class
         {
             throw new System.NotImplementedException();
         }
@@ -53,7 +53,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <param name="propertyName"></param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public IEntityEntry GetEntityEntry(string propertyName)
+        public IEntityEntry GetEntityEntryReference(string propertyName)
         {
             throw new System.NotImplementedException();
         }
@@ -66,13 +66,25 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         {
             throw new System.NotImplementedException();
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="propertyName"></param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public Task ReloadAsync(string propertyName)
+        public Task ReloadCollectionAsync(string propertyName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public Task ReloadReferenceAsync(string propertyName)
         {
             throw new System.NotImplementedException();
         }
@@ -113,7 +125,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <param name="propertyName"></param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public IEntityEntry GetEntityEntry(string propertyName)
+        public IEntityEntry GetEntityEntryReference(string propertyName)
         {
             throw new System.NotImplementedException();
         }
@@ -126,13 +138,25 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         {
             throw new System.NotImplementedException();
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="propertyName"></param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public Task ReloadAsync(string propertyName)
+        public Task ReloadCollectionAsync(string propertyName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public Task ReloadReferenceAsync(string propertyName)
         {
             throw new System.NotImplementedException();
         }
