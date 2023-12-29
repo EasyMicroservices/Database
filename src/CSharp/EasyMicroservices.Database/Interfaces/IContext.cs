@@ -76,6 +76,14 @@ namespace EasyMicroservices.Database.Interfaces
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="type"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        object[] GetPrimaryKeyValues(Type type, object entity);
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <param name="cancellationToken"></param>

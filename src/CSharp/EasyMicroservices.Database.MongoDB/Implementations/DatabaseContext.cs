@@ -89,5 +89,10 @@ namespace EasyMicroservices.Database.MongoDB.Implementations
         {
             throw new NotImplementedException();
         }
+
+        public object[] GetPrimaryKeyValues(Type type, object entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
