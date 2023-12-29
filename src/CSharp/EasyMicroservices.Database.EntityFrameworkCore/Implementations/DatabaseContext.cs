@@ -83,7 +83,12 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
 
         public object[] GetPrimaryKeyValues<TEntity>(TEntity entity)
         {
-            var entityType = _dbContext.Model.FindEntityType(typeof(TEntity));
+            return GetPrimaryKeyValues(typeof(TEntity), entity);
+        }
+
+        public object[] GetPrimaryKeyValues(Type type, object entity)
+        {
+            var entityType = _dbContext.Model.FindEntityType(type);
             var primaryKey = entityType.FindPrimaryKey();
 
             return primaryKey.Properties.Select(
