@@ -81,6 +81,16 @@ namespace EasyMicroservices.Database.EntityFrameworkCore.Implementations
             return _dbContext.Entry(entity).ReloadAsync(cancellationToken);
         }
 
+        public object[] GetPrimaryKeyValues<TEntity>(TEntity entity)
+        {
+            var entityType = _dbContext.Model.FindEntityType(typeof(TEntity));
+            var primaryKey = entityType.FindPrimaryKey();
+
+            return primaryKey.Properties.Select(
+                pkProperty => entityType.FindProperty(pkProperty.Name).GetGetter().GetClrValue(entity))
+                .ToArray();
+        }
+
         public void Dispose()
         {
             _dbContext.Dispose();
