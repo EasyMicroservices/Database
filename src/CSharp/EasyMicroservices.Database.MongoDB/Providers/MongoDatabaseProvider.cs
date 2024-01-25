@@ -60,7 +60,7 @@ namespace EasyMicroservices.Database.MongoDB.Providers
         /// <returns></returns>
         public ValueTask DisposeAsync()
         {
-            return ValueTask.CompletedTask;
+            return new ValueTask();
         }
 
         /// <summary>
