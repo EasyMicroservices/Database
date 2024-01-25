@@ -82,7 +82,7 @@ namespace EasyMicroservices.Database.MongoDB.Implementations
         /// <exception cref="NotImplementedException"></exception>
         public ValueTask DisposeAsync()
         {
-            return ValueTask.CompletedTask;
+            return new ValueTask();
         }
 
         public object[] GetPrimaryKeyValues<TEntity>(TEntity entity)
